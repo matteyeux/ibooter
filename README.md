@@ -28,7 +28,7 @@ Run `make`
 4) example : `./ibooter -i iBEC.bin ibec`
 
 ### Load IMG3 file
-Once you have build the IMG3 file, and your device is in kDFU mode run : <br>
+Once you have built the IMG3 file, and your device is in kDFU mode run : <br>
 `./ibooter -l iBEC.bin.img3`
 
 ### Credit
