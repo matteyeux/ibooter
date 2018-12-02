@@ -22,10 +22,6 @@ ifeq ($(DEBUG), 1)
 	DEBUG-V = "-DEBUG"
 endif
 
-define print_success
-	@echo "\033[0;32m$1\033[0m"
-endef
-
 default : all
 
 all : $(TARGET)
@@ -33,7 +29,7 @@ all : $(TARGET)
 $(TARGET) : $(OBJECTS)
 	@echo " LD	$(TARGET)"
 	@$(CC) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
-	$(call print_success, "Successfully built $(TARGET) for $(uname_s)")
+	@echo " Successfully built $(TARGET) for $(uname_s)"
 
 $(SRC)/%.o: $(SRC)/%.c
 	@echo " CC	$<"
