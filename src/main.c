@@ -28,7 +28,8 @@ static struct option longopts[] = {
 	{ NULL,			0,					NULL,  0 }
 };
 
-char *find_img_type(const char *binfile){
+char *find_img_type(const char *binfile)
+{
 	FILE *fp;
 	char *buf;
 	int ch;
@@ -60,9 +61,6 @@ char *find_img_type(const char *binfile){
 		}
 		else {
 			if( i > ISSTRSIZE ) {
-
-				//printf("%6lu: ", ftell(fp) - i - 1);
-
 				buf[i] = '\0';
 				sprintf(img_type, "%c%c%c%c",buf[0], buf[1], buf[2], buf[3]);
 				free(buf);
@@ -104,29 +102,26 @@ int main(int argc, char *argv[])
 	char *file, *img3file, *tag;
 	char* logfile = "recovery.log";
 
-	if (argc < 2)
-	{	
+	if (argc < 2) {
 		usage(argv);
 		return 0;
 	}
 
-	while((opt = getopt_long(argc, argv, "ilkmsedh", longopts, &optindex)) > 0)
-	{
-		switch(opt)
-		{
+	while((opt = getopt_long(argc, argv, "ilkmsedh", longopts, &optindex)) > 0) {
+		switch(opt) {
 			case 'i':
 				img3 = 1;
-				if (argc == 4){
+				if (argc == 4) {
 					file = argv[2];
 					tag = argv[3];
-				} else if (argc == 3){
+				} else if (argc == 3) {
 					file = argv[2];
 					tag = find_img_type(file);
 				}
 				break;
 			case 'l':
 				load = 1;
-				if (argc == 3){
+				if (argc == 3) {
 					img3file = argv[2];
 				}
 				printf("%s\n", img3file);
@@ -155,7 +150,7 @@ int main(int argc, char *argv[])
 
 	if (img3) {
 		char img3_out[128];
-		if(file != NULL){
+		if(file != NULL) {
 			create_image_preprocess(file, tag, "ibec.cool");
 			create_image(tag);
 			sprintf(img3_out, "%s.img3", file);
@@ -163,9 +158,8 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (load)
-	{	
-		if(!is_IMG3(img3file) || img3file == NULL){
+	if (load) {
+		if(!is_IMG3(img3file) || img3file == NULL) {
 			printf("[e] %s is not an IMG3 file\n", img3file);
 			return -1;
 		}
@@ -175,8 +169,8 @@ int main(int argc, char *argv[])
 		close_recovery();
 	}
 
-	if (kickstart)
-	{	char img3_out[128];
+	if (kickstart) {
+		char img3_out[128];
 		if (img3) {
 			if(file != NULL){
 				create_image_preprocess(file, tag, "ibec.cool");
@@ -186,7 +180,7 @@ int main(int argc, char *argv[])
 			}
 		}
 
-		if(!is_IMG3(img3file) || img3file == NULL){
+		if(!is_IMG3(img3file) || img3file == NULL) {
 			printf("[e] %s is not an IMG3 file\n", img3file);
 			return -1;
 		}
@@ -196,22 +190,19 @@ int main(int argc, char *argv[])
 		close_recovery();
 
 	}
-	if (shell)
-	{	
+	if (shell) {
 		init_recovery();
 		prog_console(logfile);
 		close_recovery();
 	}
 
-	if (exit_recovery)
-	{
+	if (exit_recovery) {
 		init_recovery();
 		device_autoboot();	
 		close_recovery();
 	}
 
-	if (diag_mode)
-	{
+	if (diag_mode) {
 		char *command = "diags";
 		init_recovery();
 		device_sendcmd(&command);

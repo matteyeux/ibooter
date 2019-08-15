@@ -22,18 +22,18 @@ void debug(const char* format, ...)
 	#endif
 }
 
-bool is_IMG3(const char *file){
+bool is_IMG3(const char *file)
+{
 	bool ret;
-	char begin_file[19], filetype[5], imgtype[5];
 	int fd;
+	char begin_file[19], filetype[5], imgtype[5];
 
 	memset(begin_file, 0, sizeof(begin_file));
 	memset(filetype, 0, sizeof(filetype));
 	memset(imgtype, 0, sizeof(imgtype));
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
+	if (fd == -1) {
 		printf("Could not open %s : %s\n", file, strerror(errno));
 		exit(1);
 	}
