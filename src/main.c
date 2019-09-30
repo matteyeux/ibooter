@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 				printf("%s\n", img3file);
 				break;
 			case 'k':
-				printf("kickstart\n");
+				kickstart = 1;
 				break;
 			case 'm':
 				break;
@@ -184,6 +184,7 @@ int main(int argc, char *argv[])
 			printf("[e] %s is not an IMG3 file\n", img3file);
 			return -1;
 		}
+
 		printf("%s\n", img3file);
 		init_recovery();
 		device_send(img3_out, 1);
